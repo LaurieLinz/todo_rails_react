@@ -1,2 +1,2 @@
-This is a project that I created using rails and react
+This is a project that I created using rails5 and react
 
