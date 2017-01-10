@@ -12,11 +12,29 @@ var Body = React.createClass({
         this.setState({ todos: newState })
     },
 
+  handleDelete(id) {
+    $.ajax({
+      url: `/api/v1/todos/${id}`,
+      type: 'DELETE',
+      success:() => {
+           this.removeTodoClient(id);
+      }
+    });
+  },
+
+  removeTodoClient(id) {
+    var newTodos = this.state.todos.filter((todo) => {
+        return todo.id != id;
+    });
+
+    this.setState({ todos: newTodos });
+  },  
+
   render() {
     return (
       <div>
         <NewTodo handleSubmit={this.handleSubmit} />
-        <AllTodos todos={this.state.todos} />
+        <AllTodos todos={this.state.todos} handleDelete={this.handleDelete} />
       </div>
     )
   }
