@@ -3,13 +3,17 @@ var AllTodos = React.createClass({
         this.props.handleDelete(id);
     },
 
+  onUpdate(todo) {
+    this.props.onUpdate(todo);
+  },  
+
   render() {
     var todos= this.props.todos.map((todo) => {
       return (
         <div key={todo.id}>
-          <h3>{todo.name}</h3>
-          <p>{todo.description}</p>
-          <button onClick={this.handleDelete.bind(this, todo.id)} >Delete</button>
+          <Todo todo={todo}
+              handleDelete={this.handleDelete.bind(this, todo.id)}
+              handleUpdate={this.onUpdate} />
         </div>
       )
     });
